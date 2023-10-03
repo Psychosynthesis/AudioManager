@@ -1,8 +1,0 @@
-2023-10-02 05:42:16 - Starting C:\Program Files\NodeJS\node.exe  --harmony C:\Devtools\Projects\AudioManager\node_modules\node-windows\lib\wrapper.js --file C:\Devtools\Projects\AudioManager\scripts\server.js --scriptoptions= --log "NodeJS AudioManager wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
-2023-10-02 05:42:16 - Started 13156
-2023-10-02 05:57:02 - Starting C:\Program Files\NodeJS\node.exe  --harmony C:\Devtools\Projects\AudioManager\node_modules\node-windows\lib\wrapper.js --file C:\Devtools\Projects\AudioManager\scripts\server.js --scriptoptions= --log "NodeJS AudioManager wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
-2023-10-02 05:57:02 - Started 3468
-2023-10-02 06:15:34 - Starting C:\Program Files\NodeJS\node.exe  --harmony C:\Devtools\Projects\AudioManager\node_modules\node-windows\lib\wrapper.js --file C:\Devtools\Projects\AudioManager\scripts\server.js --scriptoptions= --log "NodeJS AudioManager wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
-2023-10-02 06:15:34 - Started 9368
-2023-10-03 05:03:42 - Starting C:\Program Files\NodeJS\node.exe  --harmony C:\Devtools\Projects\AudioManager\node_modules\node-windows\lib\wrapper.js --file C:\Devtools\Projects\AudioManager\scripts\server.js --scriptoptions= --log "NodeJS AudioManager wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
-2023-10-03 05:03:42 - Started 8908
