@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volume</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    html, body { margin: 0; background: #202020; color: #efefef; }
+    .container { margin: 0 auto; display: flex; flex-direction: column; max-width: 800px; height: 100vh; }
+    .input-container { transform: rotate(270deg); display: flex; }
+    h1 { text-align: center; }
+    input { width: 400px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Control PC volume</h1>
+    <div class="input-container">
+      <input type="range" min="0" max="100" step="1" onchange="onInputChange();" id="volume-change-input"/>
+    </div>
+  </div>
+  <script>
+    function onInputChange() {
+      var newValue = document.getElementById("volume-change-input").value;
+      fetch("/api/setvolume", {
+        method: "post",
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        //make sure to serialize your JSON body
+        body: JSON.stringify({ volume: newValue })
+      }).then( (response) => {
+        //do something awesome that makes the world a better place
+      });
+    }
+  </script>
+</body>
+</html>

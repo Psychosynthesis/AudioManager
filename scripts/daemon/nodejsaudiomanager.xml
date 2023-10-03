@@ -1,0 +1,33 @@
+<service>
+	<id>nodejsaudiomanager.exe</id>
+	<name>NodeJS AudioManager</name>
+	<description>NodeJS AudioManager as Windows Service</description>
+	<executable>C:\Program Files\NodeJS\node.exe</executable>
+	<argument>--harmony</argument>
+	<argument>C:\Devtools\Projects\AudioManager\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>--file</argument>
+	<argument>C:\Devtools\Projects\AudioManager\scripts\server.js</argument>
+	<argument>--scriptoptions=</argument>
+	<argument>--log</argument>
+	<argument>NodeJS AudioManager wrapper</argument>
+	<argument>--grow</argument>
+	<argument>0.25</argument>
+	<argument>--wait</argument>
+	<argument>1</argument>
+	<argument>--maxrestarts</argument>
+	<argument>3</argument>
+	<argument>--abortonerror</argument>
+	<argument>n</argument>
+	<argument>--stopparentfirst</argument>
+	<argument>undefined</argument>
+	<argument>--maxretries</argument>
+	<argument>10</argument>
+	<logmode>rotate</logmode>
+	<stoptimeout>30sec</stoptimeout>
+	<serviceaccount>
+		<domain>HOME</domain>
+		<user>LocalSystem</user>
+		<password></password>
+	</serviceaccount>
+	<workingdirectory>C:\Devtools\Projects\AudioManager</workingdirectory>
+</service>
