@@ -15,6 +15,8 @@ There is some simillar libs for same goals, like [win-audio](https://github.com/
 In order not to run this yourself every time, the [node-windows](https://www.npmjs.com/package/node-windows) package is used here, which makes an `exe`-wrapper for the script and allows you to install it on the system as a service. After installing this package, use the command to install the service: `npm run setup` \
 For removing: `npm run uninstall`
 
+## Attention! The code in test.cpp was written in a hurry, do not use it in production!
+
 ## Build dll:
 `g++ -shared -o test.dll test.cpp -lole32 -loleaut32 -lwinmm` \
 `lwinmm` here need for `waveInGetNumDevs`-function
