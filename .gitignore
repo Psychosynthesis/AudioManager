@@ -1,4 +1,5 @@
 /node_modules
+/scripts/daemon
 
 # Atom-editor plugin-config to load code on server (may content passwords)
 .remote-sync.json
