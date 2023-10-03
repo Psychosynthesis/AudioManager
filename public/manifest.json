@@ -1,0 +1,17 @@
+{
+  "name": "PC Volume",
+  "short_name": "Vol",
+  "icons": [{
+        "src": "speaker.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }, {
+        "src": "favicon.svg",
+        "sizes": "512x512",
+        "type": "image/svg+xml"
+      }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1d1f21",
+  "theme_color": "#0e1621"
+}

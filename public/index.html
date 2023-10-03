@@ -2,13 +2,19 @@
 <html>
 <head>
   <title>Volume</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="/manifest.json" />
   <style>
     html, body { margin: 0; background: #202020; color: #efefef; }
     .container { margin: 0 auto; display: flex; flex-direction: column; max-width: 800px; height: 100vh; }
     .input-container { transform: rotate(270deg); display: flex; }
     h1 { text-align: center; }
     input { width: 400px; }
+
+    @media (max-width: 700px) {
+      .input-container { flex-grow: 1; }
+    }
   </style>
 </head>
 <body>

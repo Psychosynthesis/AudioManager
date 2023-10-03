@@ -25,4 +25,4 @@ Starting the server after installation: \
 ## Known problems
 At the moment, there is some kind of error when trying to return a string with a message from the `setVolume` function - the function works, but when returning the value, the Node crashes without any messages. I’m not sure about the correctness of my code, there’s probably some kind of type mismatch, but it’s quite difficult to debug without any-errors — after all, I haven’t written in C for a long time and I can’t immediately understand what’s wrong. When the [ffi-rs](https://github.com/zhangyuang/node-ffi-rs) package is updated and will displays errors, I will try to fix this problem.
 
-For now, you can simply remove returning messages and change the function type to void so that the service does not crash when the volume changes.
+For now, you can simply remove returning messages from the `setVolume` and change the function type to void so that the service does not crash when the volume changes.
