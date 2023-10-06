@@ -11,21 +11,14 @@
 #include <endpointvolume.h>
 #include <functiondiscoverykeys_devpkey.h> // Need to use PKEY_Device_FriendlyName
 
-static inline char *getCstring(std::string stringToConvert) {
-  char *result = new char[stringToConvert.length() + 1];
-  strcpy(result, stringToConvert.c_str());
-  return result;
-}
-
 static const char VOLUME_RANGE_ERR[] = "Volume must be a fractional number ranging from 0 to 1";
 static const char NO_ENDPOINTS_ERR[] = "No endpoints found.";
-static const char OK_MSG[] = "OK";
+static const char OK_MSG[] = "Ok";
 
-extern "C" char *setVolume(double newVolume) {
+extern "C" int setVolume(double newVolume) {
   if (newVolume < 0 || newVolume > 1) {
     std::cout << VOLUME_RANGE_ERR << std::endl;
-    char* ret = getCstring(VOLUME_RANGE_ERR);
-    return ret;
+    return 1;
   }
 
   HRESULT hr = S_OK;
@@ -42,8 +35,8 @@ extern "C" char *setVolume(double newVolume) {
   hr = pCollection->GetCount(&count);
 
   if (count == 0) {
-    char* ret = getCstring(NO_ENDPOINTS_ERR);
-    return ret;
+    std::cout << NO_ENDPOINTS_ERR << std::endl;
+    return 2;
   }
 
   for (UINT i = 0; i < count; i++) {
@@ -52,6 +45,7 @@ extern "C" char *setVolume(double newVolume) {
     IAudioEndpointVolume *endpointVolume = NULL;
     pEnumerator->GetDevice(pwszID, &pEndpoint);
     pEndpoint->Activate(__uuidof(IAudioEndpointVolume),CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
+    /* Вариант получения свойств интерфейса и вывод его названия, для изменения громкости это не нужно
     hr = pEndpoint->OpenPropertyStore(STGM_READ, &pProps);
     PROPVARIANT varName;
     PropVariantInit(&varName);
@@ -60,14 +54,14 @@ extern "C" char *setVolume(double newVolume) {
     CoTaskMemFree(pwszID);
     pwszID = NULL;
     PropVariantClear(&varName);
+    */
     endpointVolume->SetMasterVolumeLevelScalar((float)newVolume, NULL); // set volume level of device to 0.1 (10%)
     endpointVolume->Release();
     // you can save endpointVolume in a container to set set volume level for each device.
   }
 
   std::cout << OK_MSG << std::endl;
-  char* ret = getCstring(OK_MSG);
-  return ret;
+  return 0;
 }
 
 extern "C" void showDevices() {
@@ -96,19 +90,4 @@ extern "C" void showDevices() {
   }
 }
 
-extern "C" const char *concatenateStrings(const char *str1, const char *str2) {
-  std::string result = std::string(str1) + std::string(str2);
-  char *cstr = new char[result.length() + 1];
-  strcpy(cstr, result.c_str());
-  return cstr;
-}
-
-extern "C" char **createArrayString(char **arr, int size) {
-  char **vec = (char **)malloc((size) * sizeof(char *));
-  for (int i = 0; i < size; i++) {
-    vec[i] = arr[i];
-  }
-  return vec;
-}
-
-extern "C" void voidExample() { printf("%s", "hello world"); }
+extern "C" void voidExample() { printf("%s", "Hi! This is windows volume-changer dll example."); }

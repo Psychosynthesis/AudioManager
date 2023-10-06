@@ -7,6 +7,12 @@ const EventLogger = require('node-windows').EventLogger;
 const SERVER_PORT = 8080;
 const logger = new EventLogger('New windows-event logger');
 
+const resultCodes = {
+  0: "Ok",
+  1: "Volume must be a fractional number ranging from 0 to 1",
+  2: "No endpoints found.",
+};
+
 // Add headers before the routes are defined
 server.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*'); // Website you wish to allow to connect
@@ -30,11 +36,13 @@ server.post('/api/setvolume', function(request, response) {
     response.send('Volume must be in range from 0 to 100');
   }
 
+  let externalResult = 0;
+
   try {
-    load({
+    externalResult = load({
       library: __dirname + '/../test.dll', // path to the dynamic library file
       funcName: 'setVolume', // the name of the function to call
-      retType: RetType.String, // the return value type
+      retType: RetType.I32, // the return value type
       paramsType: [ParamsType.Double], // the parameter types
       paramsValue: [newVolume] // the actual parameter values
     });
@@ -43,8 +51,7 @@ server.post('/api/setvolume', function(request, response) {
     console.err(err);
   }
 
-  response.send("OK");
-  // console.log("returnValueOfWinApi is: ", returnValueOfWinApi);
+  response.send(resultCodes[externalResult]);
 });
 
 server.listen(SERVER_PORT, () => {
