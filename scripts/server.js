@@ -4,13 +4,16 @@ const { load, RetType, ParamsType } = require('ffi-rs');
 const EventLogger = require('node-windows').EventLogger;
 // const dynamicLib = platform === 'win32' ? './test.dll' : "./test.so"
 
-const SERVER_PORT = 8080;
+const SERVER_PORT = 12300;
 const logger = new EventLogger('New windows-event logger');
 
-const resultCodes = {
+const messageCodes = {
   0: "Ok",
   1: "Volume must be a fractional number ranging from 0 to 1",
   2: "No endpoints found.",
+  3: "Volume is not specified",
+  5: "NodeJS AudioManager server start at port " + SERVER_PORT,
+  42: "Something went wrong when tried using extern DLL (unknown error)",
 };
 
 // Add headers before the routes are defined
@@ -26,17 +29,18 @@ server.use(express.static(__dirname + '/../public')); // Will return index.html 
 
 server.post('/api/setvolume', function(request, response) {
   const input = request.body; // Access the parse results as request.body
+  let externalResult = 0;
   if (!input.hasOwnProperty('volume')) {
     response.status(422);
-    response.send('Volume is not specified');
+    response.send(messageCodes[3]);
+    return;
   }
-  const newVolume = parseInt(input['volume'], 10) * 0.01;
-  if (newVolume < 0 || newVolume > 1) {
+  const newVolume = parseFloat(input['volume']);
+  if (isNaN(newVolume) || newVolume < 0 || newVolume > 1) {
     response.status(422);
-    response.send('Volume must be in range from 0 to 100');
+    response.send(messageCodes[1]);
+    return;
   }
-
-  let externalResult = 0;
 
   try {
     externalResult = load({
@@ -47,15 +51,21 @@ server.post('/api/setvolume', function(request, response) {
       paramsValue: [newVolume] // the actual parameter values
     });
   } catch(err) {
-    logger.error('Something went wrong when tried using extern DLL: ' + err.name + ' ' + err.message, 2);
-    console.err(err);
+    logger.error('Something went wrong when tried using extern DLL: ' + err.name + ' ' + err.message, 42);
+    console.error(err);
+    response.send(err.message);
+    return;
   }
 
-  response.send(resultCodes[externalResult]);
+  if (externalResult != 0) {
+    console.error(messageCodes[externalResult]);
+  }
+
+  response.send(messageCodes[externalResult]);
 });
 
 server.listen(SERVER_PORT, () => {
-  logger.info('NodeJS AudioManager server start at port ' + SERVER_PORT, 1); // Second param is event code, use your own
+  logger.info(messageCodes[5], 5); // Second param is event code, use your own
   console.log('Server listening on port ' + SERVER_PORT);
   console.log('Open http://127.0.0.1:'+ SERVER_PORT +' in your browser');
 });

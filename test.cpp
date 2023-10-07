@@ -60,7 +60,6 @@ extern "C" int setVolume(double newVolume) {
     // you can save endpointVolume in a container to set set volume level for each device.
   }
 
-  std::cout << OK_MSG << std::endl;
   return 0;
 }
 
