@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-	viewBox="0 0 64 64" enable-background="new 0 0 64 64">
-<g>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
 	<g>
 		<path fill="#394240" d="M59.998,28.001h-7.999c-2.211,0-4,1.789-4,4s1.789,4,4,4h7.999c2.211,0,4-1.789,4-4
 			S62.209,28.001,59.998,28.001z"/>
@@ -16,5 +13,4 @@
 	</g>
 	<path fill="#F76D57" d="M31.999,50.344l-9.172-9.171c-0.75-0.75-1.766-1.172-2.828-1.172H8v-16h11.999
 		c1.062,0,2.078-0.422,2.828-1.172l9.172-9.171V50.344z"/>
-</g>
 </svg>
